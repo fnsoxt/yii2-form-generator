@@ -1,4 +1,4 @@
-Yii2-Adminlte
+Yii2-form-generator
 ==========
 
 Backend user & password:
