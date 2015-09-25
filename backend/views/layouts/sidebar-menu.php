@@ -55,6 +55,21 @@ echo Menu::widget(
                     ],
                 ],
             ],
+            [
+                'label' => Yii::t('app', '表单'),
+                'url' => ['#'],
+                'icon' => 'fa fa-cog',
+                'options' => [
+                    'class' => 'treeview',
+                ],
+                'items' => [
+                    [
+                        'label' => Yii::t('app', '列表'),
+                        'url' => ['/form/index'],
+                        'icon' => 'fa fa-user',
+                    ],
+                ],
+            ],
         ]
     ]
 );

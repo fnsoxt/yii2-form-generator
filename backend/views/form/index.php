@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\FormSearch */
@@ -29,13 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'desc:ntext',
-            'template_name',
-            'status',
+            // 'desc:ntext',
+            // 'template_name',
+            'status:boolean',
             // 'options:ntext',
-            // 'create_at',
+            'create_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{field}<br>{data}',
+                'buttons' => [
+                    'field' => function($url,$moel,$key){
+                        return Html::a('表单选项',Url::to(['field/index','FieldSearch[form_id]'=>$key,'FieldSearch[order]'=>'','FieldSearch[required]'=>'']));
+                    },
+                    'data' => function($url,$moel,$key){
+                        return Html::a('表单数据',Url::to(['item/index','ItemSearch[form_id]'=>$key]));
+                    },
+                ],
+            ],
         ],
     ]); ?>
 
