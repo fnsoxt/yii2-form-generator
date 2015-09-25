@@ -23,7 +23,7 @@ return [
             'enableAutoLogin' => true,
         ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
             //'enableStrictParsing' => true,
             'rules' => [
