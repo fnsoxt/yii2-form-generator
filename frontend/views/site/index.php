@@ -1,6 +1,12 @@
 <?php
+use yii\helpers\Url;
+use yii\helpers\Html;
+use common\models\Form;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
+
+$model_form = Form::find()->where(['status'=>1])->all();
 ?>
 <div class="site-index">
 
@@ -13,6 +19,30 @@ $this->title = 'My Yii Application';
     </div>
 
     <div class="body-content">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <?php if(Yii::$app->getSession()->hasFlash('success')): ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?= Yii::$app->getSession()->getFlash('success'); ?>
+                    </div>
+                </div>
+                <?php endif ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?= Html::beginForm(['site/form'], 'get') ?>
+                            <div class="form-group">
+                                <?= Html::dropDownList('id', 0, ArrayHelper::map($model_form, 'id', 'name'),['class'=>'form-control']) ?>
+                            </div>
+                            <div class="form-group">
+                                <?= Html::submitButton('开始报名', ['class' => 'btn btn-primary btn-block']) ?>
+                            </div>
+                        <?= Html::endForm() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-4">
