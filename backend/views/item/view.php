@@ -6,9 +6,24 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
 
-$this->title = $model->name;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$attributes = [];
+$attributes[] = 'id';
+$attributes[] = 'form_id';
+
+$fields = $model->form->fields;
+foreach($fields as $key => $value){
+    $attributes[] = [
+        'label' => $value->name,
+        'value' => $model->getFields($value->id)->value,
+    ];
+}
+
+$attributes[] = 'ip:ntext';
+$attributes[] = 'create_at';
 ?>
 <div class="item-view">
 
@@ -27,14 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'id',
-            'form_id',
-            'name',
-            'desc:ntext',
-            'ip:ntext',
-            'create_at',
-        ],
+        'attributes' => $attributes,
     ]) ?>
 
 </div>

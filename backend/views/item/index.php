@@ -9,6 +9,30 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns = [];
+$columns[] = ['class' => 'yii\grid\SerialColumn'];
+// $columns[] = 'id';
+
+$fields = $dataProvider->models[0]->form->fields;
+foreach ($fields as $key => $value) {
+    $id = $value->id;
+    $columns[] = [
+        'label' => $value->name,
+        'content' => function($model) use ($id) {
+            if($model->getFields($id))
+                return $model->getFields($id)->value;
+            else
+                return null;
+        },
+    ];
+}
+
+// $columns[] = 'form_id';
+$columns[] = 'ip:ntext';
+$columns[] = 'create_at:datetime';
+$columns[] = ['class' => 'yii\grid\ActionColumn'];
+
 ?>
 <div class="item-index">
 
@@ -24,18 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'form_id',
-            'name',
-            'desc:ntext',
-            'ip:ntext',
-            // 'create_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+        'columns' => $columns,
     ]); ?>
 
 </div>
