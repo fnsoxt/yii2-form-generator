@@ -58,6 +58,23 @@ CREATE TABLE `item_field` (
   CONSTRAINT `item_field_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   CONSTRAINT `item_field_ibfk_2` FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
 ) ENGINE=InnoDB;
+
+INSERT INTO `form` (`id`, `name`, `desc`, `template_name`, `status`, `options`, `create_at`) VALUES
+(1, '报名测试', '这里是报名测试',   NULL,   1,  NULL,   1443156400);
+
+INSERT INTO `field` (`id`, `form_id`, `name`, `desc`, `type`, `default`, `options`, `order`, `required`, `create_at`) VALUES
+(1, 1,  '姓名', '这里是姓名',   'textInput',    '', '', 1,  1,  1443156459),
+(2, 1,  '性别', '这里是性别',   'dropdownList', '', '男,男\r\n女,女',   2,  1,  1443156521);
+
+INSERT INTO `item` (`id`, `form_id`, `name`, `desc`, `ip`, `create_at`) VALUES
+(1, 1,  NULL,   NULL,   '192.168.1.50', 1443156634),
+(2, 1,  NULL,   NULL,   '192.168.1.50', 1443156642);
+
+INSERT INTO `item_field` (`id`, `item_id`, `field_id`, `value`) VALUES
+(1, 1,  1,  '测试1'),
+(2, 1,  2,  '男'),
+(3, 2,  1,  '测试2'),
+(4, 2,  2,  '女');
 EOF;
         $this->execute($sql);
     }

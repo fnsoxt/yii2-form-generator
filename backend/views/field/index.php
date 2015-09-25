@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'default:ntext',
             // 'options:ntext',
             'order',
-            'required',
+            'required:boolean',
             'create_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
